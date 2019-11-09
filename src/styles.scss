@@ -27,11 +27,9 @@ $Usalab-theme: mat-light-theme($Usalab-primary, $Usalab-accent, $Usalab-warn);
 @include angular-material-theme($Usalab-theme);
 
 /* You can add global styles to this file, and also import other style files */
-body {
-    margin: 0;
-}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body { margin: 0; font-family:Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif; }
 
 .tile-start > figure {
     display: flex;
@@ -53,3 +51,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
      background-color: white !important;
      border-color: aquamarine;
  }
+
+ .text-center{
+     text-align: center;
+}
