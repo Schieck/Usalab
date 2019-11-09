@@ -7,13 +7,15 @@ import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    SearchComponent
+    SearchComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
