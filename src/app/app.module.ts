@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { SearchComponent } from './search/search.component';
+import { IgxCalendarModule } from 'igniteui-angular';
 
 @NgModule({
   declarations: [
@@ -21,9 +22,11 @@ import { SearchComponent } from './search/search.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    IgxCalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
