@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../../material.module';
 
 
 @Component({

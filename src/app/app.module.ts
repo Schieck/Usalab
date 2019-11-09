@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SearchComponent } from './search/search.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
