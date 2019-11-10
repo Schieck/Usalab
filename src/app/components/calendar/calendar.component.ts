@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CalendarEvent } from 'angular-calendar';
 import { MaterialModule } from '../../material.module';
+import { registerLocaleData } from '@angular/common';
 
 @Component({
   selector: 'calendar',
@@ -13,6 +14,7 @@ export class CalendarComponent implements OnInit {
   view: string = 'month';
 
   viewDate: Date = new Date();
+  date = new Date();
 
   events: CalendarEvent[] = [];
   constructor() { }
@@ -20,8 +22,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
   }
   value(params) {
-    console.log(params);
-    console.log('teste')
+    this.date = params;
   }
 
 }
