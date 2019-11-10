@@ -42,7 +42,7 @@ import { UsersComponent } from './users/users.component';
     MaterialFileInputModule,
     ToastrModule.forRoot({
       timeOut: 20000,
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-left',
       preventDuplicates: true,
       progressBar: true,
       closeButton: true,

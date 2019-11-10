@@ -3,6 +3,7 @@ import { SearchComponent } from '../search/search.component';
 import { MaterialModule } from '../../material.module';
 import { AuthenticationService } from 'src/app/services';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 export class NavBarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  @Input() avatar : string;
+  @Input() currentUser : User;
 
   ngOnInit() {
   }

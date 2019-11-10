@@ -37,7 +37,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return of(new HttpResponse({ status: 200, body: body }));
                 } else {
                     // else return 400 bad request
-                    return throwError({ error: { message: 'Usuário ou senha incorreto' } });
+                    return throwError({ error: { message: 'Usuário ou senha incorreto.' } });
                 }
             }
 
