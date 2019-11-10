@@ -7,16 +7,18 @@ import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { CalendarioComponent } from './calendario/calendario.component';
+import { CalendarComponent } from './calendar/calendar.component';
 import { SearchComponent } from './search/search.component';
 import { IgxCalendarModule } from 'igniteui-angular';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     SearchComponent,
-    CalendarioComponent
+    CalendarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

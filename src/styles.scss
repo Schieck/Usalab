@@ -57,6 +57,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
  }
 
 @import "~igniteui-angular/lib/core/styles/themes/index";
+
 // Uncomment the following lines if you want to add a custom palette:
 // $primary: #731963 !default;
 // $secondary: #ce5712 !default;
@@ -64,3 +65,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @include igx-core();
 @include igx-theme($default-palette);
+
+.igx-calendar__header{
+    display: none;
+}
+
+.igx-calendar__date--current .igx-calendar__date-content {
+    color: #2dabe8 !important;
+}
+.igx-calendar__date--selected .igx-calendar__date-content{
+    color: white !important;
+    background: #2dabe8 !important;
+}
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.space-logo {
+    margin-left:15px;
+}
+
+.size-logo {
+    height:80px;
+}
