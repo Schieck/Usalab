@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~8.2.13",
+    "@angular/animations": "^8.2.13",
     "@angular/cdk": "~8.2.3",
     "@angular/common": "~8.2.13",
     "@angular/compiler": "~8.2.13",
@@ -29,6 +29,7 @@
     "jszip": "^3.1.5",
     "minireset.css": "~0.0.4",
     "resize-observer-polyfill": "^1.5.1",
+    "ngx-toastr": "^11.2.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",

@@ -1,5 +1,9 @@
-<nav-bar></nav-bar>
-<dashboard></dashboard>
-<div class="container">
-  <router-outlet></router-outlet>
+<nav-bar *ngIf="currentUser"></nav-bar>
+
+    <alert></alert>
+    <router-outlet></router-outlet>
+
+
+<div class="text-center">
+    <p>Made with ❤ by ES Depression</p>
 </div>

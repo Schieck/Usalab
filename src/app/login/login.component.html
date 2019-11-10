@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-title><img src="../../assets/images/logo.png" width="175px" alt="Logo Usalab e Tecnopuc"></mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <mat-form-field>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input type="text" matInput placeholder="Usuário" formControlName="username"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Este campo usuário é obrigatório</div>
+                    </div>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <input type="password" matInput placeholder="Senha" formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Este campo senha é obrigatório</div>
+                    </div>
+                </mat-form-field>
+            </div>
+            <div class="button" style="display: flex; justify-content: center;">
+                <button type="submit" mat-raised-button style="margin-right: 15px;">Entrar</button>
+                <button mat-stroked-button [routerLink]="['/register']" color="primary">Registrar</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
