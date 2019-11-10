@@ -1,15 +1,5 @@
 <div class="row" style="display: flex; justify-content: flex-end;">
     <div class="col-md-6">
-        <div class="row" *ngFor="let user of users">
-            <div class="col-md-6">
-                <span>{{user.username}} ({{user.firstName}} {{user.lastName}})</span>
-            </div>
-            <div class="col-md-6">
-                <button mat-flat-button color="warn" (click)="deleteUser(user.id)">Delete</button>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
         <calendar></calendar>
     </div>
 </div>

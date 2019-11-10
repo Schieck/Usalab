@@ -6,25 +6,15 @@
                     <h6 style="margin: 0;">{{ date | date: 'longDate'  }}</h6>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="row" *ngFor="let hora of horas">
-                        <div class="col-md-12" style="margin: 10px 0px 0px -20px">
-                            {{hora}}
+
+                    <div class="row" *ngFor="let o of obj">
+                        <div class="col-md-3" style="margin: 0 0px 0px -20px">
+                            {{o.hour}}
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <div class="row">
-                        <div class="col-md-12" style="background-color: lightgreen; margin-top: 10px; border-left: lawngreen solid 5px; padding-left: 0; display: flex; align-items: center; height: 100px;">
-                            teste
-                        </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-md-12" style="background-color:tomato; margin-top: 10px; border-left: red solid 5px; padding-left: 0; display: flex; align-items: center; height: 100px;">
-                                teste
-                            </div>
-                        </div>
+                        <div class="col-md-9" [ngStyle]="{'background-color': o.style}">
+                            {{o.style}}
+  
+                            
                 </div>
             </div>
         </div>

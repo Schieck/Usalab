@@ -1,8 +1,11 @@
-<nav-bar *ngIf="currentUser"></nav-bar>
+<nav-bar *ngIf="currentUser" currentUser="{{currentUser}}"></nav-bar>
 
-    <alert></alert>
-    <router-outlet></router-outlet>
-
+<alert></alert>
+<div class="row">
+    <div class="col-md-12">
+        <router-outlet></router-outlet>
+    </div>
+</div>
 
 <div class="text-center">
     <p>Made with ❤ by ES Depression</p>
