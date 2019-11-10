@@ -1,34 +1,58 @@
-
-        <div class="row " style="display: flex; justify-content: flex-end;">
-            <div class="col-md-6">
-                <div class="row" style="display: flex; align-items: initial;">
-                    <div class="col-md-12">
-                        <h5>{{ date | date: 'longDate'  }}</h5>
-                    </div>
+<div class="mat-elevation-z2">
+    <div class="row " style="display: flex; justify-content: flex-end;">
+        <div class="col-md-6">
+            <div class="row" style="display: flex; align-items: initial;">
+                <div class="col-md-12">
+                    <h6 style="margin: 0;">{{ date | date: 'longDate'  }}</h6>
                 </div>
             </div>
-            <div class="col-md-6" style="background-color: #626262;">
-                <igx-calendar (onSelection)="value($event)" locale="iceland"></igx-calendar>
-                <hr style="width: 220px;display: flex; margin-left: 35px;  height: 1px;color: #545864;background-color: #545864;border: none;">
-                <h5 style="color:white; margin-left:35px">Categorias</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="row" *ngFor="let hora of horas">
+                        <div class="col-md-12" style="margin: 10px 0px 0px -20px">
+                            {{hora}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-12" style="background-color: lightgreen; margin-top: 10px; border-left: lawngreen solid 5px; padding-left: 0; display: flex; align-items: center; height: 100px;">
+                            teste
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12" style="background-color:tomato; margin-top: 10px; border-left: red solid 5px; padding-left: 0; display: flex; align-items: center; height: 100px;">
+                                teste
+                            </div>
+                        </div>
+                </div>
             </div>
         </div>
-        <div class="row" style="display: flex; justify-content: flex-end;">
-            <div class="col-md-6" style="display: flex;justify-content: center; background-color: #626262;">
-                <button
-                    style="background-color: #F39845; color: white; margin-top: 20px; width: 220px; border-radius: 15px;"
-                    mat-button>Pesquisa</button>
+        <div class="col-md-6" style="background-color: #626262;">
+            <igx-calendar (onSelection)="value($event)" locale="iceland"></igx-calendar>
+            <hr
+                style="width: 220px;display: flex; margin-left: 35px;  height: 1px;color: #545864;background-color: #545864;border: none;">
+            <h6 style="color:white; margin-left:35px; margin:5px">Categorias</h6>
+            <div class="row" style="display: flex; justify-content: flex-end;">
+                <div class="col-md-12" style="display: flex;justify-content: center; background-color: #626262;">
+                    <button
+                        style="background-color: #F39845; color: white; margin-top: 10px; width: 220px; border-radius: 15px;"
+                        mat-button>Pesquisa</button>
+                </div>
+            </div>
+            <div class="row" style="display: flex; justify-content: flex-end;">
+                <div class="col-md-12" style="display: flex;justify-content: center; background-color: #626262;">
+                    <button mat-button
+                        style="margin-top: 10px; background-color: #8576ED; color: white; width: 220px; border-radius: 15px">Educação</button>
+                </div>
+            </div>
+            <div class="row" style="display: flex; justify-content: flex-end;">
+                <div class="col-md-12" style="display: flex;justify-content: center; background-color: #626262;">
+                    <button mat-button
+                        style="margin-top: 10px; background-color: #FF467F; color: white; width: 220px; border-radius: 15px; margin-bottom: 20px;">Usabilidade</button>
+                </div>
             </div>
         </div>
-        <div class="row" style="display: flex; justify-content: flex-end;">
-            <div class="col-md-6" style="display: flex;justify-content: center; background-color: #626262;">
-                <button mat-button
-                    style="margin-top: 20px; background-color: #8576ED; color: white; width: 220px; border-radius: 15px">Educação</button>
-            </div>
-        </div>
-        <div class="row" style="display: flex; justify-content: flex-end;">
-            <div class="col-md-6" style="display: flex;justify-content: center; background-color: #626262;">
-                <button mat-button
-                    style="margin-top: 20px; background-color: #FF467F; color: white; width: 220px; border-radius: 15px; margin-bottom: 20px;">Usabilidade</button>
-            </div>
-        </div>
+    </div>
+
+</div>

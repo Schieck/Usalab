@@ -95,3 +95,16 @@ body { margin: 0; font-family:Roboto,"Helvetica Neue Light","Helvetica Neue",Hel
  .text-center{
      text-align: center;
 }
+
+.igx-calendar-picker{
+    margin: -20px;
+}
+.igx-calendar__date-content{
+    font-size: 12.5px;
+}
+.igx-calendar-picker__prev {
+    margin-left: 5px;;
+}
+.igx-calendar-picker__next {
+    margin-left: -5px;
+}
