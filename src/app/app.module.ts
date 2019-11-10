@@ -20,6 +20,9 @@ import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './helpers
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
+import { ResearchComponent } from './research/research.component';
+import { UsabilityComponent } from './usability/usability.component';
+import { EducationComponent } from './education/education.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { UsersComponent } from './users/users.component';
     AlertComponent,
     DashboardComponent,
     RegisterComponent,
-    UsersComponent
+    UsersComponent,
+    ResearchComponent,
+    UsabilityComponent,
+    EducationComponent
   ],
   imports: [
     BrowserModule,

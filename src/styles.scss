@@ -58,3 +58,8 @@ body { margin: 0; font-family:Roboto,"Helvetica Neue Light","Helvetica Neue",Hel
 .centered-and-cropped {
      object-fit: cover;
 }
+
+.hover-effect:hover {
+  transform: scale(1.05);
+  transition: transform .2s;
+}

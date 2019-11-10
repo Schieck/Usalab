@@ -4,12 +4,12 @@
     </mat-grid-tile>
     <mat-grid-tile class="tile-end">
         <img mat-button [matMenuTriggerFor]="menu" *ngIf="avatar; else noAvatar"
-            src="{{avatar}}" class="centered-and-cropped mat-elevation-z3" width="60" height="60"
+            src="{{avatar}}" class="centered-and-cropped mat-elevation-z3 hover-effect" width="60" height="60"
             style="border-radius:50%; margin-right: 20px; cursor: pointer;" />
         <ng-template #noAvatar>
             <mat-icon [matMenuTriggerFor]="menu"
                 style="border-radius:50%; margin-right: 20px;  display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 40px; background:white; height: 60px; width: 60px;"
-                class="centered-and-cropped mat-elevation-z3">
+                class="centered-and-cropped mat-elevation-z3 hover-effect">
                 person
             </mat-icon>
         </ng-template>
