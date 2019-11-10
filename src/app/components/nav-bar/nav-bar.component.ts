@@ -15,7 +15,7 @@ import { User } from 'src/app/models';
 export class NavBarComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  @Input() currentUser : User;
+  @Input() avatar : string;
 
   ngOnInit() {
   }
