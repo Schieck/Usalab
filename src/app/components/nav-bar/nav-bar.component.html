@@ -1,12 +1,20 @@
-<mat-grid-list cols="2" rowHeight="80px" class="row no-padding no-margin nav-bar-background mat-elevation-z2">
-        <mat-grid-tile class="tile-start">
-            <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
-        </mat-grid-tile>
-        <mat-grid-tile class="tile-end">
-            <img mat-button [matMenuTriggerFor]="menu" src="{{avatar}}" class="centered-and-cropped mat-elevation-z6" width="60" height="60"
-                style="border-radius:50%; margin-right: 20px;" click="logout()" />
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="logout()">Logout</button>
-            </mat-menu>
-        </mat-grid-tile>
+<mat-grid-list cols="2" rowHeight="80px" class="row no-padding no-margin nav-bar-background mat-elevation-z3">
+    <mat-grid-tile class="tile-start">
+        <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
+    </mat-grid-tile>
+    <mat-grid-tile class="tile-end">
+        <img mat-button [matMenuTriggerFor]="menu" src="{{avatar}}" class="centered-and-cropped mat-elevation-z3"
+            width="60" height="60" style="border-radius:50%; margin-right: 20px; cursor: pointer;" click="logout()" />
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['']" color="primary">
+                <mat-icon>dashboard</mat-icon>Dashboard
+            </button>
+            <button mat-menu-item [routerLink]="['/users']" color="primary">
+                <mat-icon>person</mat-icon>Usuários
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>Logout
+            </button>
+        </mat-menu>
+    </mat-grid-tile>
 </mat-grid-list>
