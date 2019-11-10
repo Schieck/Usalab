@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CalendarEvent } from 'angular-calendar';
-import { MaterialModule } from '../material.module';
+import { MaterialModule } from '../../material.module';
 
 @Component({
   selector: 'calendar',

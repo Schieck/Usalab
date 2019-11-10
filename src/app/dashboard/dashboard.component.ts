@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CalendarComponent } from '../calendar/calendar.component'
+import { CalendarComponent } from '../components/calendar/calendar.component'
 
 @Component({
   selector: 'app-dashboard',
