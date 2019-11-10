@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { MaterialModule } from '../../material.module';
+import { AuthenticationService } from 'src/app/services';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,9 +12,15 @@ import { MaterialModule } from '../../material.module';
 })
 
 export class NavBarComponent implements OnInit {
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+
+  @Input() avatar : string;
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(['/login']);
+  }
 }

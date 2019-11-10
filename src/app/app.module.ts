@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { ToastrModule } from 'ngx-toastr';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +19,7 @@ import { AlertComponent  } from './components/alert/alert.component';
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './helpers';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { RegisterComponent } from './register/register.component';
     LoginComponent,
     AlertComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -36,9 +39,10 @@ import { RegisterComponent } from './register/register.component';
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
+    MaterialFileInputModule,
     ToastrModule.forRoot({
       timeOut: 20000,
-      positionClass: 'toast-bottom-left',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressBar: true,
       closeButton: true,
