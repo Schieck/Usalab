@@ -1,0 +1,36 @@
+@import '~igniteui-angular/lib/core/styles/themes/index';
+
+
+.sample-wrapper {
+    overflow-y: auto;
+}
+
+.cal-wrapper {
+    margin: 20px;
+    height: 100%;
+    float: left;
+    min-width: 350px;
+    max-width: 400px;
+    border-radius: 4px;
+    box-shadow:  1px 1px 5px 1px #888888;
+}
+
+/*BASIC THEMING*/
+
+$my-calendar-theme: igx-calendar-theme(
+  $content-background: #626262,
+  $picker-arrow-color: #ffff,
+  $picker-arrow-hover-color: #2dabe8,
+  $year-current-text-color: #2dabe8,
+  $year-hover-text-color: #ffff,
+  $month-current-text-color: #2dabe8,
+  $month-hover-text-color: #ffff,
+  $picker-text-color: #2dabe8,
+  $picker-text-hover-color: #ffff
+);
+
+:host{
+    ::ng-deep{
+        @include igx-calendar($my-calendar-theme);
+    }
+}

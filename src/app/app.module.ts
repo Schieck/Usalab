@@ -10,14 +10,20 @@ import { ToastrModule } from 'ngx-toastr';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 import { AppComponent } from './app.component';
+
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
 import { SearchComponent } from './components/search/search.component';
+import { IgxCalendarModule } from 'igniteui-angular';
+import localeBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeBr, 'pt')
 import { AlertComponent  } from './components/alert/alert.component';
 
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './helpers';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { UsersComponent } from './users/users.component';
 
@@ -26,6 +32,8 @@ import { UsersComponent } from './users/users.component';
     AppComponent,
     NavBarComponent,
     SearchComponent,
+    CalendarComponent,
+    DashboardComponent,
     LoginComponent,
     AlertComponent,
     DashboardComponent,
@@ -36,6 +44,8 @@ import { UsersComponent } from './users/users.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
+    IgxCalendarModule,
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
@@ -56,4 +66,5 @@ import { UsersComponent } from './users/users.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
