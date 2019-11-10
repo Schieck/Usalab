@@ -3,7 +3,10 @@
             <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
         </mat-grid-tile>
         <mat-grid-tile class="tile-end">
-            <img src="{{avatar}}" class="centered-and-cropped mat-elevation-z6" width="60" height="60"
+            <img mat-button [matMenuTriggerFor]="menu" src="{{avatar}}" class="centered-and-cropped mat-elevation-z6" width="60" height="60"
                 style="border-radius:50%; margin-right: 20px;" click="logout()" />
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">Logout</button>
+            </mat-menu>
         </mat-grid-tile>
 </mat-grid-list>

@@ -1,9 +1,13 @@
 <mat-nav-list>
-    <mat-list-item *ngFor="let user of users">
-        <h3>{{user.firstName}} {{user.lastName}}</h3>
-        <p>{{user.username}}</p>
-        <img src="{{user.avatar}}" class="centered-and-cropped mat-elevation-z6" width="60" height="60"
-            style="border-radius:50%" />
-        <button mat-flat-button color="warn" (click)="deleteUser(user.id)">Delete</button>
+    <mat-list-item class="mat-elevation-z2" *ngFor="let user of users">
+        <div class="tile-start">
+            <h3 style="margin-right: 10px;">{{user.firstName}} {{user.lastName}}</h3>
+            <p style="margin-top: 30px; font-size: 12px;">~ {{user.username}}</p>
+        </div>
+        <div class="tile-end">
+            <img src="{{user.avatar}}" class="centered-and-cropped" width="40" height="40" style="border-radius:50%" />
+            <button style="display: flex; float: right;" mat-flat-button color="warn"
+                (click)="deleteUser(user.id)">Delete</button>
+        </div>
     </mat-list-item>
 </mat-nav-list>
