@@ -3,8 +3,8 @@
         <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
     </mat-grid-tile>
     <mat-grid-tile class="tile-end">
-        <img mat-button [matMenuTriggerFor]="menu" *ngIf="currentUser.avatar; else noAvatar"
-            src="{{currentUser.avatar}}" class="centered-and-cropped mat-elevation-z3" width="60" height="60"
+        <img mat-button [matMenuTriggerFor]="menu" *ngIf="avatar; else noAvatar"
+            src="{{avatar}}" class="centered-and-cropped mat-elevation-z3" width="60" height="60"
             style="border-radius:50%; margin-right: 20px; cursor: pointer;" />
         <ng-template #noAvatar>
             <mat-icon [matMenuTriggerFor]="menu"
