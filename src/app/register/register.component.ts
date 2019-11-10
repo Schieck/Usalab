@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { FileValidator } from 'ngx-material-file-input';
 
 import { AlertService, UserService, AuthenticationService } from '../services';
 
 @Component({
-   templateUrl: 'register.component.html',
-   styleUrls: ['./register.component.scss']
+  templateUrl: 'register.component.html',
+  styleUrls: ['./register.component.scss']
 })
 
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
   submitted = false;
+  image = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +35,8 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      avatar: [null]
     });
   }
 
@@ -48,17 +51,45 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    console.log(this.image);
+
+    if (this.image != null) {
+      this.registerForm.value.avatar = this.image;
+    }
+
     this.loading = true;
     this.userService.register(this.registerForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful', true);
+          this.alertService.success('Registrado com sucesso!', true);
           this.router.navigate(['/login']);
         },
         error => {
           this.alertService.error(error);
           this.loading = false;
         });
+  }
+
+  loadImage() {
+    if (this.registerForm.value.avatar)
+      if (this.registerForm.value.avatar._files && this.registerForm.value.avatar._files[0]) {
+        try {
+          var reader = new FileReader();
+
+          reader.onload = (e: any) => {
+            this.image = e.target.result;
+          };
+
+          reader.readAsDataURL(this.registerForm.value.avatar._files[0]);
+
+        } catch{
+          this.alertService.error("Insira uma imagem válida.");
+          this.image = null;
+          return;
+        }
+      }else{
+        this.image = null;
+      }
   }
 }

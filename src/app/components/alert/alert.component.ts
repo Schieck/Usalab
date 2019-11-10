@@ -34,10 +34,10 @@ export class AlertComponent implements OnInit, OnDestroy {
   }
 
   showSuccess(text) {
-    this.toastr.success(text, 'Sucesso!');
+    this.toastr.success(text, 'Sucesso');
   }
 
   showError(text) {
-    this.toastr.error(text, 'Erro!');
+    this.toastr.error(text, 'Erro');
   }
 }

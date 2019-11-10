@@ -1,7 +1,28 @@
-<mat-grid-list cols="2" rowHeight="80px" class="row no-padding no-margin nav-bar-background mat-elevation-z6">
-        <mat-grid-tile class="tile-start">
-            <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
-        </mat-grid-tile>
-        <mat-grid-tile class="tile-end">
-        </mat-grid-tile>
+<mat-grid-list cols="2" rowHeight="80px" class="row no-padding no-margin nav-bar-background mat-elevation-z3">
+    <mat-grid-tile class="tile-start">
+        <img src="../../assets/images/logo.png" alt="logo" class="space-logo size-logo align">
+    </mat-grid-tile>
+    <mat-grid-tile class="tile-end">
+        <img mat-button [matMenuTriggerFor]="menu" *ngIf="avatar; else noAvatar"
+            src="{{avatar}}" class="centered-and-cropped mat-elevation-z3" width="60" height="60"
+            style="border-radius:50%; margin-right: 20px; cursor: pointer;" />
+        <ng-template #noAvatar>
+            <mat-icon [matMenuTriggerFor]="menu"
+                style="border-radius:50%; margin-right: 20px;  display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 40px; background:white; height: 60px; width: 60px;"
+                class="centered-and-cropped mat-elevation-z3">
+                person
+            </mat-icon>
+        </ng-template>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="['']" color="primary">
+                <mat-icon>dashboard</mat-icon>Dashboard
+            </button>
+            <button mat-menu-item [routerLink]="['/users']" color="primary">
+                <mat-icon>person</mat-icon>Usuários
+            </button>
+            <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>Logout
+            </button>
+        </mat-menu>
+    </mat-grid-tile>
 </mat-grid-list>
