@@ -1,15 +1,12 @@
-<nav-bar *ngIf="currentUser"></nav-bar>
+<nav-bar *ngIf="currentUser" currentUser="{{currentUser}}"></nav-bar>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 offset-sm-3">           
-            <alert></alert>
-            <router-outlet></router-outlet>
-        </div>
+<alert></alert>
+<div class="row">
+    <div class="col-md-12">
+        <router-outlet style="padding: 5px;"></router-outlet>
     </div>
 </div>
 
-
 <div class="text-center">
-  <p>Made with ❤ by ES Depression</p>
+    <p>Made with ❤ by ES Depression</p>
 </div>
