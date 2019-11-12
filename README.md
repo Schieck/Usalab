@@ -7,11 +7,11 @@ An MVP application to control the essays of Usalab at Tecnopuc.
 
 - Run `npm i` to restore the packages.
 
+- Run `npm i -g @angular/cli` to install angular cli.
+
 - Run `ng serve` for a dev server. 
 
-- Navigate to `http://localhost:4200/`. 
-
-- The app will automatically reload if you change any of the source files.
+- Navigate to `http://localhost:4200/`.
 
 ## Architecture
 For this application do we have some layers:
