@@ -3,7 +3,7 @@ An MVP application to control the essays of Usalab at Tecnopuc.
 
 ## How to run the project
 
-Install [NodeJS]("https://nodejs.org/en/download/").
+Install [NodeJS](https://nodejs.org/en/download/) .
 
 Run `npm i` to restore the packages.
 
