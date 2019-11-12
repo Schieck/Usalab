@@ -128,6 +128,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            //get by type
+            if (request.url.match(/\/essays\/[a-z]+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by type in essays array
+                    let urlParts = request.url.split('/');
+                    let type = urlParts[urlParts.length - 1];
+                    let matchedessays = essays.filter(essay => { return essay.type === type; });
+
+                    return of(new HttpResponse({ status: 200, body: matchedessays }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
             // get essay by id
             if (request.url.match(/\/essays\/\d+$/) && request.method === 'GET') {
                 // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
@@ -151,9 +167,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 let newessay = request.body;
 
                 // validation
-                let duplicateessay = essays.filter(essay => { return essay.essayname === newessay.essayname; }).length;
+                let duplicateessay = essays.filter(essay => { return essay.title === newessay.title; }).length;
+
                 if (duplicateessay) {
-                    return throwError({ error: { message: 'Simulação "' + newessay.essayname + '" já existe.' } });
+                    return throwError({ error: { message: 'Simulação "' + newessay.title + '" já existe.' } });
                 }
 
                 // save new essay

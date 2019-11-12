@@ -7,8 +7,8 @@ import { Essay } from '../models';
 export class EssayService {
     constructor(private http: HttpClient) { }
 
-    getAll() {
-        return this.http.get<Essay[]>(`/essays`);
+    getAll(type: string) {
+        return this.http.get<Essay[]>(`/essays/` + type);
     }
 
     getById(id: number) {

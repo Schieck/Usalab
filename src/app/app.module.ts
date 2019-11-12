@@ -22,6 +22,7 @@ import localeBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeBr, 'pt')
 import { AlertComponent  } from './components/alert/alert.component';
+import { EssayComponent } from './components/essay/essay.component';
 
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './helpers';
 import { RegisterComponent } from './register/register.component';
@@ -44,7 +45,8 @@ import { EducationComponent } from './education/education.component';
     UsersComponent,
     ResearchComponent,
     UsabilityComponent,
-    EducationComponent
+    EducationComponent,
+    EssayComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +71,9 @@ import { EducationComponent } from './education/education.component';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     fakeBackendProvider
+  ],
+  entryComponents: [
+    EssayComponent
   ],
   bootstrap: [AppComponent]
 })
