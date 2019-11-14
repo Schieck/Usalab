@@ -12,7 +12,7 @@ export class EssayService {
     }
 
     getAllNoType() {
-        return this.http.get<Essay[]>(`/essays/`);
+        return this.http.get<Essay[]>(`/essays`);
     }
 
     getById(id: number) {
