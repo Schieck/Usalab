@@ -87,6 +87,7 @@ export class EducationComponent implements OnInit {
       .subscribe(
         data => {
           this.alertService.success('Simulação Atualizada com sucesso!', true);
+          this.loading = false;
           this.loadAllEssays();
         },
         error => {
