@@ -11,6 +11,10 @@ export class EssayService {
         return this.http.get<Essay[]>(`/essays/` + type);
     }
 
+    getAllNoType() {
+        return this.http.get<Essay[]>(`/essays/`);
+    }
+
     getById(id: number) {
         return this.http.get(`/essays/` + id);
     }
