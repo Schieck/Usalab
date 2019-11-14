@@ -47,7 +47,7 @@
                 <mat-form-field>
                     <mat-icon matPrefix>face</mat-icon>
                     <mat-label>Avatar</mat-label>
-                    <ngx-mat-file-input #avatar formControlName="avatar" [accept]="'image/*'"  (change)="loadImage()"  [errorStateMatcher]="AvatarErrorStateMatcher" placeholder="Avatar, mande sua foto :)">
+                    <ngx-mat-file-input #avatar formControlName="avatar" [accept]="'image/*'"  (change)="loadImage()" placeholder="Avatar, mande sua foto :)">
                     </ngx-mat-file-input>
                     <button mat-icon-button matSuffix *ngIf="!avatar.empty"
                         (click)="avatar.clear($event)">

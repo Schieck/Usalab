@@ -161,25 +161,55 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            // update essay by id
+            if (request.url.match(/\/essays\/\d+$/) && request.method === 'PUT') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by id in essays array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    // get new essay object from post body
+                    let newessay = request.body;
+
+                    var elementPos = essays.map(function (x) { return x.id; }).indexOf(id);
+                    essays[elementPos] = newessay;
+
+                    localStorage.setItem('essays', JSON.stringify(essays));
+
+                    return of(new HttpResponse({ status: 200, body: newessay }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
             // register essay
             if (request.url.endsWith('/essays/register') && request.method === 'POST') {
-                // get new essay object from post body
-                let newessay = request.body;
 
-                // validation
-                let duplicateessay = essays.filter(essay => { return essay.title === newessay.title; }).length;
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // get new essay object from post body
+                    let newessay = request.body;
 
-                if (duplicateessay) {
-                    return throwError({ error: { message: 'Simulação "' + newessay.title + '" já existe.' } });
+                    // validation
+                    let duplicateessay = essays.filter(essay => { return essay.title === newessay.title; }).length;
+
+                    if (duplicateessay) {
+                        return throwError({ error: { message: 'Simulação "' + newessay.title + '" já existe.' } });
+                    }
+
+                    // save new essay
+                    newessay.id = essays.length + 1;
+                    essays.push(newessay);
+                    localStorage.setItem('essays', JSON.stringify(essays));
+
+                    // respond 200 OK
+                    return of(new HttpResponse({ status: 200 }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
                 }
-
-                // save new essay
-                newessay.id = essays.length + 1;
-                essays.push(newessay);
-                localStorage.setItem('essays', JSON.stringify(essays));
-
-                // respond 200 OK
-                return of(new HttpResponse({ status: 200 }));
             }
 
             // delete essay

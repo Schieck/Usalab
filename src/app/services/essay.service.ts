@@ -19,12 +19,12 @@ export class EssayService {
         return this.http.get(`/essays/` + id);
     }
 
-    register(user: Essay) {
-        return this.http.post(`/essays/register`, user);
+    register(essay: Essay) {
+        return this.http.post(`/essays/register`, essay);
     }
 
-    update(user: Essay) {
-        return this.http.put(`/essays/` + user.id, user);
+    update(essay: Essay) {
+        return this.http.put(`/essays/` + essay.id, essay);
     }
 
     delete(id: number) {

@@ -43,7 +43,10 @@ export class EducationComponent implements OnInit {
       fromDate: [new Date],
       toDate: [new Date],
       fromTime: [''],
-      toTime: ['']
+      toTime: [''],
+      type: [this.type],
+      user: [''],
+      id: ['']
     });
     this.loadAllEssays();
   }
@@ -55,13 +58,7 @@ export class EducationComponent implements OnInit {
 
   editEssay(id) {
     this.essayService.getById(id).pipe(first()).subscribe(essay => {
-      this.essayForm.value.title = essay["title"];
-      this.essayForm.value.id = essay["id"];
-      this.essayForm.value.description = essay["description"];
-      this.essayForm.value.fromDate = essay["fromDate"];
-      this.essayForm.value.toDate = essay["toDate"];
-      this.essayForm.value.fromTime = essay["fromTime"];
-      this.essayForm.value.toTime = essay["toTime"];
+      this.essayForm.setValue(essay);
     });
   }
   get f() { return this.essayForm.controls; }
@@ -85,11 +82,11 @@ export class EducationComponent implements OnInit {
 
     this.loading = true;
 
-    this.essayService.register(this.essayForm.value)
+    this.essayService.update(this.essayForm.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Simulação cadastrada com sucesso!', true);
+          this.alertService.success('Simulação Atualizada com sucesso!', true);
           this.loadAllEssays();
         },
         error => {
@@ -103,13 +100,7 @@ export class EducationComponent implements OnInit {
     this.essayService.getAll(this.type).pipe(first()).subscribe(essays => {
       this.essays = essays;
       if (essays[0])
-        this.essayForm.value.title = essays[0].title;
-        this.essayForm.value.id = essays[0].id;
-        this.essayForm.value.description = essays[0].description;
-        this.essayForm.value.fromDate = essays[0].fromDate;
-        this.essayForm.value.toDate = essays[0].toDate;
-        this.essayForm.value.fromTime = essays[0].fromTime;
-        this.essayForm.value.toTime = essays[0].toTime;
+        this.editEssay(essays[0].id)
     });
   }
 
