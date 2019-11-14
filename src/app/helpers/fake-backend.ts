@@ -178,8 +178,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                         let samedate = (newdate === olderdate); 
                         let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
-                        
-                        return samedate && !insidehour;
+
+                        return samedate && insidehour;
                     }).length;
 
                     if (sameInterval) {
@@ -215,8 +215,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
                         let samedate = (newdate === olderdate); 
                         let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
-                        
-                        return samedate && !insidehour;
+
+                        return samedate && insidehour;
                     }).length;
 
                     if (duplicateessay) {
