@@ -8,14 +8,14 @@
             </div>
             <div  style="overflow-y: scroll; max-height: 430px;">
                     <div class="row" *ngFor="let card of cards">
-                        <div *ngIf="card.date == dateView && card.type == 'Educação'" class="col-md-12" style="background-color: #EDEAFB; border-left: #8977F0 solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
+                        <div *ngIf="card.date == dateView && card.type == 'education'" class="col-md-12" style="background-color: #EDEAFB; border-left: #8977F0 solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
                             <div class="row">
                                 <div class="col-md-10" style="margin:0; padding: 0;">
                                     <span style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
                                 </div>
-                                <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
+                                <!-- <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
                                     <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px" (click)="openModal(card)">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row" style="margin-top: 7.5px;">
                                 <div class="col-md-12">
@@ -23,14 +23,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="card.date == dateView && card.type == 'Pesquisa'" class="col-md-12" style="background-color: #FCF1EB; border-left: #EEA67D solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
+                        <div *ngIf="card.date == dateView && card.type == 'research'" class="col-md-12" style="background-color: #FCF1EB; border-left: #EEA67D solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
                             <div class="row">
                                 <div class="col-md-10" style="margin:0; padding: 0;">
                                     <span style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
                                 </div>
-                                <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
+                                <!-- <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
                                     <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row" style="margin-top: 7.5px;">
                                 <div class="col-md-12">
@@ -38,14 +38,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div *ngIf="card.date == dateView && card.type == 'Usabilidade'" class="col-md-12" style="background-color: #FEE2F8; border-left: #FA40D0 solid 2.5px; height: 80px; margin-bottom: 10px; padding-left: 12.5px;">
+                        <div *ngIf="card.date == dateView && card.type == 'usability'" class="col-md-12" style="background-color: #FEE2F8; border-left: #FA40D0 solid 2.5px; height: 80px; margin-bottom: 10px; padding-left: 12.5px;">
                             <div class="row">
                                 <div class="col-md-10" style="margin:0; padding: 0;">
                                     <span style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
                                 </div>
-                                <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
+                                <!-- <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
                                     <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px">
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row" style="margin-top: 7.5px;">
                                 <div class="col-md-12">

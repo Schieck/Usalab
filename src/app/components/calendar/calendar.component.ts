@@ -22,88 +22,7 @@ export class CalendarComponent implements OnInit {
   viewDate: Date = new Date();
   dateView: string;
   date = new Date();
-  cards = [ {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-  {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-  {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-  {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-  {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-  {
-    title: "Teste title",
-    date: "13-11-2019",
-    initialHour: "15:30",
-    finalHour: "14:45",
-    initialHourConverted: 13.5,
-    finalHourConverted: 14.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Educação'
-  },
-
-  {
-    title: "Teste title titletitletitletitletitletitletitletitletitletitletitles",
-    date: "13-11-2019",
-    initialHour: "16:30",
-    finalHour: "19:45",
-    initialHourConverted: 16.5,
-    finalHourConverted: 19.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Pesquisa'
-  },
-  {
-    title: "Teste title title title title title title",
-    date: "14-11-2019",
-    initialHour: "15:30",
-    finalHour: "17:45",
-    initialHourConverted: 15.5,
-    finalHourConverted: 17.75,
-    description:"BLA BLA BLA BLA BLA",
-    type: 'Usabilidade'
-  }
-  ];
+  cards = [];
   
   horas = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
 
@@ -120,6 +39,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.defineDate();
     this.loadAllEssays();
+    this.createArrayCards();
   }
   value(params) {
     this.date = params;
@@ -129,11 +49,40 @@ export class CalendarComponent implements OnInit {
     const date = new Date();
     this.dateView =  date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
   }
-  private loadAllEssays() {
-    this.essayService.getAll().pipe(first()).subscribe(essays => {
+  public loadAllEssays() {
+    this.essayService.getAllNoType().pipe(first()).subscribe(essays => {
       this.essays = essays;
+      this.createArrayCards();
     });
   }
+  public createArrayCards() {
+    this.essays.forEach(element => {
+      this.cards.push({
+        id: element.id,
+        title: element.title,
+        description: element.description,
+        type: element.type,
+        initialHour: element.fromTime,
+        finalHour: element.toTime,
+        date: this.convertDate(element.fromDate),
+        initialHourConverted: this.convertTime(element.fromTime),
+        finalHourConverted: this.convertTime(element.toTime),
+      })
+    });
+    console.log(this.cards)
+  }
+  convertDate(date) {
+    return date.substring(8,10) + '-' + date.substring(5,7) + '-' + date.substring(0,4)
+  }
+  convertTime(time) {
+    let min = time.charAt(time.length-2);
+    min = min/60;
+    if(time.length == 4) {
+      time = '0'+time;
+    }
+    return (time.substring(0,2) + min)/1;
+  }
+
 
 
 }
