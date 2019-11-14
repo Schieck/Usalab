@@ -172,6 +172,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // get new essay object from post body
                     let newessay = request.body;
 
+                    let sameInterval = essays.filter(essay => {
+                        let newdate = new Date(newessay.fromDate).setHours(0,0,0,0);
+                        let olderdate = new Date(essay.fromDate).setHours(0,0,0,0);
+
+                        let samedate = (newdate === olderdate); 
+                        let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
+                        
+                        return samedate && !insidehour;
+                    }).length;
+
+                    if (sameInterval) {
+                        return throwError({ error: { message: 'Já existe uma simulação para este horário.' } });
+                    }
+
                     var elementPos = essays.map(function (x) { return x.id; }).indexOf(id);
                     essays[elementPos] = newessay;
 
@@ -195,8 +209,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // validation
                     let duplicateessay = essays.filter(essay => { return essay.title === newessay.title; }).length;
 
+                    let sameInterval = essays.filter(essay => {
+                        let newdate = new Date(newessay.fromDate).setHours(0,0,0,0);
+                        let olderdate = new Date(essay.fromDate).setHours(0,0,0,0);
+
+                        let samedate = (newdate === olderdate); 
+                        let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
+                        
+                        return samedate && !insidehour;
+                    }).length;
+
                     if (duplicateessay) {
                         return throwError({ error: { message: 'Simulação "' + newessay.title + '" já existe.' } });
+                    }
+
+                    if (sameInterval) {
+                        return throwError({ error: { message: 'Já existe uma simulação para este horário.' } });
                     }
 
                     // save new essay
@@ -246,6 +274,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .pipe(materialize())
             .pipe(delay(500))
             .pipe(dematerialize());
+    }
+
+    convertTime(time) {
+        var time = time.split(':');
+        return (time[0] * 60 + time[1]);
     }
 }
 

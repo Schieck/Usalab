@@ -5,6 +5,8 @@ import { MaterialModule } from '../../material.module';
 import { registerLocaleData } from '@angular/common';
 import { AuthenticationService, EssayService } from 'src/app/services';
 import { first } from 'rxjs/operators';
+import { User, Essay } from 'src/app/models';
+import { Subscription } from 'rxjs';
 
 
 
@@ -23,8 +25,6 @@ export class CalendarComponent implements OnInit {
   dateView: string;
   date = new Date();
   cards = [];
-  
-  horas = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
 
   events: CalendarEvent[] = [];
   constructor(
@@ -69,20 +69,15 @@ export class CalendarComponent implements OnInit {
         finalHourConverted: this.convertTime(element.toTime),
       })
     });
-    console.log(this.cards)
+
+    this.cards.sort((a,b) => (a.initialHourConverted > b.initialHourConverted) ? 1 : ((b.initialHourConverted > a.initialHourConverted) ? -1 : 0));
   }
   convertDate(date) {
     return date.substring(8,10) + '-' + date.substring(5,7) + '-' + date.substring(0,4)
   }
+
   convertTime(time) {
-    let min = time.charAt(time.length-2);
-    min = min/60;
-    if(time.length == 4) {
-      time = '0'+time;
-    }
-    return (time.substring(0,2) + min)/1;
+    var time = time.split(':');
+    return (time[0]*60 +  time[1]);
   }
-
-
-
 }
