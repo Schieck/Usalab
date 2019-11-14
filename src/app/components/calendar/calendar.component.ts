@@ -84,7 +84,6 @@ export class CalendarComponent implements OnInit {
   verifyExist() {
     this.showNotExist = true;
     this.essays.forEach(element => {
-      console.log(this.convertDate(element.fromDate), this.dateView)
       if(this.convertDate(element.fromDate) == this.dateView) {
         this.showNotExist = false;
       }

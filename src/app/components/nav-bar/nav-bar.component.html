@@ -17,8 +17,17 @@
             <button mat-menu-item [routerLink]="['']" color="primary">
                 <mat-icon>dashboard</mat-icon>Dashboard
             </button>
-            <button mat-menu-item [routerLink]="['/users']" color="primary">
-                <mat-icon>person</mat-icon>Usuários
+            <button mat-menu-item [routerLink]="['/education']" color="primary">
+                <img style="margin-right: 12.5px;" src="../../assets/images/cap.svg"
+        height="24px">Educação
+            </button>
+             <button mat-menu-item [routerLink]="['/research']" color="primary">
+                <img style="margin-right: 12.5px;" src="../../assets/images/innovation.svg"
+                height="24px">Pesquisa
+            </button>
+            <button mat-menu-item [routerLink]="['/usability']" color="primary">
+                <img style="margin-right: 12.5px;" src="../../assets/images/settings.svg"
+                height="24px">Usabilidade
             </button>
             <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>Logout
