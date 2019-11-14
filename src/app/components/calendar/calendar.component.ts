@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarEvent } from 'angular-calendar';
 import { MaterialModule } from '../../material.module';
 import { registerLocaleData } from '@angular/common';
+import { AuthenticationService, EssayService } from 'src/app/services';
+import { first } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'calendar',
@@ -12,7 +16,9 @@ import { registerLocaleData } from '@angular/common';
 
 export class CalendarComponent implements OnInit {
   view: string = 'month';
-
+  currentUser: User;
+  currentUserSubscription: Subscription;
+  essays: Essay[] = [];
   viewDate: Date = new Date();
   dateView: string;
   date = new Date();
@@ -102,10 +108,18 @@ export class CalendarComponent implements OnInit {
   horas = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00']
 
   events: CalendarEvent[] = [];
-  constructor() { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private essayService: EssayService,
+  ) { 
+    this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
+  }
 
   ngOnInit() {
     this.defineDate();
+    this.loadAllEssays();
   }
   value(params) {
     this.date = params;
@@ -115,8 +129,11 @@ export class CalendarComponent implements OnInit {
     const date = new Date();
     this.dateView =  date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
   }
-  openModal(card) {
-    console.log(card)
+  private loadAllEssays() {
+    this.essayService.getAll().pipe(first()).subscribe(essays => {
+      this.essays = essays;
+    });
   }
+
 
 }
