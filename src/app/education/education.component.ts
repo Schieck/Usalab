@@ -43,7 +43,10 @@ export class EducationComponent implements OnInit {
       fromDate: [new Date],
       toDate: [new Date],
       fromTime: [''],
-      toTime: ['']
+      toTime: [''],
+      type: [this.type],
+      user: [''],
+      id: ['']
     });
     this.loadAllEssays();
   }
@@ -57,7 +60,6 @@ export class EducationComponent implements OnInit {
     this.essayService.getById(id).pipe(first()).subscribe(essay => {
       this.essayForm.setValue(essay);
     });
-    this.loadAllEssays();
   }
   get f() { return this.essayForm.controls; }
 

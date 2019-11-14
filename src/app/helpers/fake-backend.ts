@@ -172,7 +172,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     // get new essay object from post body
                     let newessay = request.body;
 
-                    var elementPos = essays.map(function (x) { return x.id; }).indexOf(newessay.id);
+                    var elementPos = essays.map(function (x) { return x.id; }).indexOf(id);
                     essays[elementPos] = newessay;
 
                     localStorage.setItem('essays', JSON.stringify(essays));
