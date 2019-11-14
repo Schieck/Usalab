@@ -3,11 +3,17 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import localeBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeBr, 'pt');
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { ToastrModule } from 'ngx-toastr';
+
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 import { AppComponent } from './app.component';
 
@@ -18,9 +24,6 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { SearchComponent } from './components/search/search.component';
 import { IgxCalendarModule } from 'igniteui-angular';
-import localeBr from '@angular/common/locales/pt';
-import { registerLocaleData } from '@angular/common';
-registerLocaleData(localeBr, 'pt')
 import { AlertComponent  } from './components/alert/alert.component';
 import { EssayComponent } from './components/essay/essay.component';
 
@@ -58,6 +61,7 @@ import { EducationComponent } from './education/education.component';
     HttpClientModule,
     MaterialModule,
     MaterialFileInputModule,
+    NgxMaterialTimepickerModule,
     ToastrModule.forRoot({
       timeOut: 20000,
       positionClass: 'toast-bottom-left',
@@ -70,6 +74,7 @@ import { EducationComponent } from './education/education.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     fakeBackendProvider
   ],
   entryComponents: [

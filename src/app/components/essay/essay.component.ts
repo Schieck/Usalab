@@ -47,8 +47,10 @@ export class EssayComponent {
     this.registerForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      from: [new Date],
-      to: [new Date]
+      fromDate: [new Date],
+      toDate: [new Date],
+      fromTime: [new Date().getHours() + ':' + new Date().getMinutes(), Validators.required],
+      toTime: [new Date().getHours() + ':' + new Date().getMinutes(), Validators.required]
     });
   }
 

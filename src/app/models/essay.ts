@@ -5,7 +5,9 @@ export class Essay {
     title: string;
     description: string;
     user: User;
-    from: Date;
-    to: Date;
+    fromDate: Date;
+    toDate: Date;
+    fromTime: string;
+    toTime: string;
     type: string;
 }

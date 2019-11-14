@@ -2,7 +2,7 @@
         height="30px">
     Educação
     <span>
-        <mat-icon (click)="openDialog()"
+        <mat-icon (click)="openDialog()" *ngIf="essays[0]"
             style="border-radius:50%; margin-left: 10%;  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 30px; background:white; height: 35px; width: 35px;"
             class="centered-and-cropped mat-elevation-z3 hover-effect">
             add
@@ -29,9 +29,9 @@
                 </mat-card-content>
                 <mat-card-actions>
                     <div class="row">
-                        <div class="col-md-6"><span class="dateLabel col-md-6">From: {{formatDate(essay.from)}}</span>
+                        <div class="col-md-6"><span class="dateLabel col-md-6">From: {{formatDate(essay.fromDate)}} {{essay.fromTime}}</span>
                         </div>
-                        <div class="col-md-6"><span class="dateLabel to">To: {{formatDate(essay.to)}}</span></div>
+                        <div class="col-md-6"><span class="dateLabel to">To: {{formatDate(essay.toDate)}} {{essay.fromTime}}</span></div>
                     </div>
                 </mat-card-actions>
             </mat-card>
@@ -39,8 +39,8 @@
     </div>
     <div class="col-md-8">
         <mat-card style="width: 100%;">
-            <form [formGroup]="essayForm" (ngSubmit)="onSubmit()">
-                <div class="row" style="display:flex; justify-content: center">
+            <form [formGroup]="essayForm" *ngIf="essays[0]" (ngSubmit)="onSubmit()">
+                <div class="row">
                     <mat-form-field>
                         <input type="text" matInput placeholder="Título" value="{{this.essayForm.value.title}}"
                             formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
@@ -49,29 +49,35 @@
                         </div>
                     </mat-form-field>
                 </div>
-                <div class="row" style="display:flex; justify-content: center">
-                    <mat-form-field>
-                        <input type="textarea" matInput placeholder="Descrição" formControlName="description"
-                            value="{{this.essayForm.value.description}}"
-                            [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                <div class="row" style="width: 100%;">
+                    <mat-form-field style="width: 100%;">
+                        <textarea style="width: 100%; height: 150px;" matInput placeholder="Descrição"
+                            formControlName="description" value="{{this.essayForm.value.description}}"
+                            [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
                         <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                             <div *ngIf="f.description.errors.required">A descrição da simulação é obrigatória</div>
                         </div>
                     </mat-form-field>
                 </div>
-                <div class="row" style="display:flex; justify-content: center">
-                    <mat-form-field>
-                        <input matInput type="datetime-local" placeholder="De" formControlName="from"
-                            value="{{this.essayForm.value.from}}">
-                        <mat-icon matSuffix>calendar_today</mat-icon>
-                    </mat-form-field>
-                </div>
-                <div class="row" style="display:flex; justify-content: center">
-                    <mat-form-field>
-                        <input matInput type="datetime-local" placeholder="Até" formControlName="to"
-                            value="{{this.essayForm.value.to}}">
-                        <mat-icon matSuffix>calendar_today</mat-icon>
-                    </mat-form-field>
+                <div class="row">
+                    <div style="margin-right: 15px;">
+                        <mat-form-field style="width: 52%;">
+                            <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="De">
+                            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                            <mat-datepicker #fromDate></mat-datepicker>
+                        </mat-form-field>
+                        <ngx-timepicker-field [controlOnly]="true" [format]="24" [defaultTime]="'12:15'" formControlName="fromTime">
+                        </ngx-timepicker-field>
+                    </div>
+                    <div>
+                        <mat-form-field style="width: 52%;">
+                            <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="De">
+                            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                            <mat-datepicker #toDate></mat-datepicker>
+                        </mat-form-field>
+                        <ngx-timepicker-field [controlOnly]="true" [format]="24" [defaultTime]="'12:15'" formControlName="toTime">
+                        </ngx-timepicker-field>
+                    </div>
                 </div>
                 <div>
                     <button [disabled]="loading" type="submit" mat-raised-button

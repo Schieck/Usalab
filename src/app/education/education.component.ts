@@ -3,10 +3,9 @@ import { first } from 'rxjs/operators';
 import { User, Essay } from '../models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService, EssayService, AlertService } from '../services';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EssayComponent } from '../components/essay/essay.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-education',
@@ -41,8 +40,10 @@ export class EducationComponent implements OnInit {
     this.essayForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      from: [new Date],
-      to: [new Date]
+      fromDate: [new Date],
+      toDate: [new Date],
+      fromTime: [''],
+      toTime: ['']
     });
     this.loadAllEssays();
   }
@@ -52,17 +53,18 @@ export class EducationComponent implements OnInit {
     this.currentUserSubscription.unsubscribe();
   }
 
-  editEssay(id){
+  editEssay(id) {
     this.essayService.getById(id).pipe(first()).subscribe(essay => {
       this.essayForm.value.title = essay["title"];
       this.essayForm.value.id = essay["id"];
       this.essayForm.value.description = essay["description"];
-      this.essayForm.value.from = essay["from"];
-      this.essayForm.value.to = essay["to"];
+      this.essayForm.value.fromDate = essay["fromDate"];
+      this.essayForm.value.toDate = essay["toDate"];
+      this.essayForm.value.fromTime = essay["fromTime"];
+      this.essayForm.value.toTime = essay["toTime"];
     });
   }
-
-
+  get f() { return this.essayForm.controls; }
 
   deleteEssay() {
     this.essayService.delete(this.essayForm.value.id).pipe(first()).subscribe(() => {
@@ -100,19 +102,22 @@ export class EducationComponent implements OnInit {
   private loadAllEssays() {
     this.essayService.getAll(this.type).pipe(first()).subscribe(essays => {
       this.essays = essays;
-      this.essayForm.value.title = essays[0].title;
-      this.essayForm.value.id = essays[0].id;
-      this.essayForm.value.description = essays[0].description;
-      this.essayForm.value.from = essays[0].from;
-      this.essayForm.value.to = essays[0].to;
+      if (essays[0])
+        this.essayForm.value.title = essays[0].title;
+        this.essayForm.value.id = essays[0].id;
+        this.essayForm.value.description = essays[0].description;
+        this.essayForm.value.fromDate = essays[0].fromDate;
+        this.essayForm.value.toDate = essays[0].toDate;
+        this.essayForm.value.fromTime = essays[0].fromTime;
+        this.essayForm.value.toTime = essays[0].toTime;
     });
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(EssayComponent, {
-        width: '300px',
-        data: this.type
-      }
+      width: '350px',
+      data: this.type
+    }
     );
 
     dialogRef.afterClosed().subscribe(result => {
@@ -121,10 +126,8 @@ export class EducationComponent implements OnInit {
     });
   }
 
-  formatDate(dateString: string): string{
-    let date = new Date(dateString);
-
-    return date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+  formatDate(dateString: string): string {
+    return (new Date(dateString)).toLocaleDateString();
   }
 
 }
