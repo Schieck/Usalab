@@ -1,27 +1,86 @@
 <div class="mat-elevation-z2">
     <div class="row " style="display: flex; justify-content: flex-end;">
-        <div class="col-md-6">
+        <div class="col-md-6" style="padding-right: 0;">
             <div class="row" style="display: flex; align-items: initial;">
-                <div class="col-md-12">
+                <div class="col-md-12" style="margin-bottom: 10px;">
                     <h6 style="margin: 0;">{{ date | date: 'longDate'  }}</h6>
                 </div>
             </div>
-
-                    <div class="row" *ngFor="let o of obj">
-                        <div class="col-md-3" style="margin: 0 0px 0px -20px">
-                            {{o.hour}}
+            <div style="overflow-y: scroll; max-height: 430px;">
+                <div class="row">
+                    <div class="col-md-12" style="padding:0; margin:0">
+                        <div class="row" *ngFor="let card of cards">
+                            <div *ngIf="card.date == dateView && card.type == 'education'" class="col-md-12"
+                                style="background-color: #EDEAFB; border-left: #8977F0 solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
+                                <div class="row">
+                                    <div class="col-md-10" style="margin:0; padding: 0;">
+                                        <span
+                                            style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 7.5px;">
+                                    <div class="col-md-12">
+                                        <span style="font-size: 16px; font-weight: bold;">{{card.title}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="card.date == dateView && card.type == 'research'" class="col-md-12"
+                                style="background-color: #FCF1EB; border-left: #EEA67D solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
+                                <div class="row">
+                                    <div class="col-md-10" style="margin:0; padding: 0;">
+                                        <span
+                                            style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
+                                    </div>
+                                    <!-- <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
+                                    <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px">
+                                </div> -->
+                                </div>
+                                <div class="row" style="margin-top: 7.5px;">
+                                    <div class="col-md-12">
+                                        <span style="font-size: 16px; font-weight: bold;"
+                                            class="continue">{{card.title}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="card.date == dateView && card.type == 'usability'" class="col-md-12"
+                                style="background-color: #FEE2F8; border-left: #FA40D0 solid 2.5px; height: 80px; margin-bottom: 10px; padding-left: 12.5px;">
+                                <div class="row">
+                                    <div class="col-md-10" style="margin:0; padding: 0;">
+                                        <span
+                                            style="font-size: 17.5px; font-weight: bold;">{{card.initialHour}}-{{card.finalHour}}</span>
+                                    </div>
+                                    <!-- <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 7.5px; cursor: pointer;">
+                                    <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px">
+                                </div> -->
+                                </div>
+                                <div class="row" style="margin-top: 7.5px;">
+                                    <div class="col-md-12">
+                                        <span style="font-size: 16px; font-weight: bold;">{{card.title}}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-9" [ngStyle]="{'background-color': o.style}">
-                            {{o.style}}
-  
-                            
+                        <div *ngIf="verifyExist()" class="col-md-12"
+                        style="background-color: #e5e5e5; border-left: #999999 solid 2.5px; height: 80px; margin-bottom: 10px;padding-left: 12.5px;">
+                        <div class="row">
+                            <div class="col-md-10" style="margin:0; padding: 0;">
+                                <span
+                                    style="font-size: 17.5px; font-weight: bold;"></span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 7.5px;">
+                            <div class="col-md-12">
+                                <span style="font-size: 16px; font-weight: bold;">Não existem agendamentos para este dia!</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="col-md-6" style="background-color: #626262;">
             <igx-calendar (onSelection)="value($event)" locale="iceland"></igx-calendar>
-            <hr
-                style="width: 220px;display: flex; margin-left: 35px;  height: 1px;color: #545864;background-color: #545864;border: none;">
             <h6 style="color:white; margin-left:35px; margin:5px">Categorias</h6>
             <div class="row" style="display: flex; justify-content: flex-end;">
                 <div class="col-md-12" style="display: flex;justify-content: center; background-color: #626262;">
@@ -44,5 +103,4 @@
             </div>
         </div>
     </div>
-
 </div>

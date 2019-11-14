@@ -51,8 +51,6 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    console.log(this.image);
-
     if (this.image != null) {
       this.registerForm.value.avatar = this.image;
     }

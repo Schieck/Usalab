@@ -12,6 +12,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // array in local storage for registered users
         let users: any[] = JSON.parse(localStorage.getItem('users')) || [];
 
+        // array in local storage for registered essays
+        let essays: any[] = JSON.parse(localStorage.getItem('essays')) || [];
+
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
@@ -114,6 +117,154 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            //get essays
+            if (request.url.endsWith('/essays') && request.method === 'GET') {
+                // check for fake auth token in header and return essays if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    return of(new HttpResponse({ status: 200, body: essays }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            //get by type
+            if (request.url.match(/\/essays\/[a-z]+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by type in essays array
+                    let urlParts = request.url.split('/');
+                    let type = urlParts[urlParts.length - 1];
+                    let matchedessays = essays.filter(essay => { return essay.type === type; });
+
+                    return of(new HttpResponse({ status: 200, body: matchedessays }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // get essay by id
+            if (request.url.match(/\/essays\/\d+$/) && request.method === 'GET') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by id in essays array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    let matchedessays = essays.filter(essay => { return essay.id === id; });
+                    let essay = matchedessays.length ? matchedessays[0] : null;
+
+                    return of(new HttpResponse({ status: 200, body: essay }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // update essay by id
+            if (request.url.match(/\/essays\/\d+$/) && request.method === 'PUT') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by id in essays array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+
+                    // get new essay object from post body
+                    let newessay = request.body;
+
+                    let sameInterval = essays.filter(essay => {
+                        let newdate = new Date(newessay.fromDate).setHours(0,0,0,0);
+                        let olderdate = new Date(essay.fromDate).setHours(0,0,0,0);
+
+                        let samedate = (newdate === olderdate); 
+                        let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
+
+                        return samedate && insidehour;
+                    }).length;
+
+                    if (sameInterval) {
+                        return throwError({ error: { message: 'Já existe uma simulação para este horário.' } });
+                    }
+
+                    var elementPos = essays.map(function (x) { return x.id; }).indexOf(id);
+                    essays[elementPos] = newessay;
+
+                    localStorage.setItem('essays', JSON.stringify(essays));
+
+                    return of(new HttpResponse({ status: 200, body: newessay }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // register essay
+            if (request.url.endsWith('/essays/register') && request.method === 'POST') {
+
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // get new essay object from post body
+                    let newessay = request.body;
+
+                    // validation
+                    let duplicateessay = essays.filter(essay => { return essay.title === newessay.title; }).length;
+
+                    let sameInterval = essays.filter(essay => {
+                        let newdate = new Date(newessay.fromDate).setHours(0,0,0,0);
+                        let olderdate = new Date(essay.fromDate).setHours(0,0,0,0);
+
+                        let samedate = (newdate === olderdate); 
+                        let insidehour =  (this.convertTime(newessay.fromTime) > this.convertTime(essay.fromTime) && this.convertTime(essay.toTime) > this.convertTime(newessay.fromTime));
+
+                        return samedate && insidehour;
+                    }).length;
+
+                    if (duplicateessay) {
+                        return throwError({ error: { message: 'Simulação "' + newessay.title + '" já existe.' } });
+                    }
+
+                    if (sameInterval) {
+                        return throwError({ error: { message: 'Já existe uma simulação para este horário.' } });
+                    }
+
+                    // save new essay
+                    newessay.id = essays.length + 1;
+                    essays.push(newessay);
+                    localStorage.setItem('essays', JSON.stringify(essays));
+
+                    // respond 200 OK
+                    return of(new HttpResponse({ status: 200 }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            // delete essay
+            if (request.url.match(/\/essays\/\d+$/) && request.method === 'DELETE') {
+                // check for fake auth token in header and return essay if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    // find essay by id in essays array
+                    let urlParts = request.url.split('/');
+                    let id = parseInt(urlParts[urlParts.length - 1]);
+                    for (let i = 0; i < essays.length; i++) {
+                        let essay = essays[i];
+                        if (essay.id === id) {
+                            // delete essay
+                            essays.splice(i, 1);
+                            localStorage.setItem('essays', JSON.stringify(essays));
+                            break;
+                        }
+                    }
+
+                    // respond 200 OK
+                    return of(new HttpResponse({ status: 200 }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
             // pass through any requests not handled above
             return next.handle(request);
 
@@ -123,6 +274,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .pipe(materialize())
             .pipe(delay(500))
             .pipe(dematerialize());
+    }
+
+    convertTime(time) {
+        var time = time.split(':');
+        return (time[0] * 60 + time[1]);
     }
 }
 
