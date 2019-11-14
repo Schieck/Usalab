@@ -55,14 +55,9 @@ export class EducationComponent implements OnInit {
 
   editEssay(id) {
     this.essayService.getById(id).pipe(first()).subscribe(essay => {
-      this.essayForm.value.title = essay["title"];
-      this.essayForm.value.id = essay["id"];
-      this.essayForm.value.description = essay["description"];
-      this.essayForm.value.fromDate = essay["fromDate"];
-      this.essayForm.value.toDate = essay["toDate"];
-      this.essayForm.value.fromTime = essay["fromTime"];
-      this.essayForm.value.toTime = essay["toTime"];
+      this.essayForm.setValue(essay);
     });
+    this.loadAllEssays();
   }
   get f() { return this.essayForm.controls; }
 

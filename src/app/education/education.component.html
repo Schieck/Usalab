@@ -44,7 +44,7 @@
             <form [formGroup]="essayForm" *ngIf="essays[0]" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <mat-form-field>
-                        <input type="text" matInput placeholder="Título" value="{{this.essayForm.value.title}}"
+                        <input type="text" matInput placeholder="Título"
                             formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                         <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                             <div *ngIf="f.title.errors.required">O título da simulação é obrigatório.</div>
@@ -54,7 +54,7 @@
                 <div class="row" style="width: 100%;">
                     <mat-form-field style="width: 100%;">
                         <textarea style="width: 100%; height: 150px;" matInput placeholder="Descrição"
-                            formControlName="description" value="{{this.essayForm.value.description}}"
+                            formControlName="description"
                             [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
                         <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                             <div *ngIf="f.description.errors.required">A descrição da simulação é obrigatória</div>
@@ -69,7 +69,7 @@
                                 <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                                 <mat-datepicker #fromDate></mat-datepicker>
                             </mat-form-field>
-                            <ngx-timepicker-field [controlOnly]="true" [format]="24" [defaultTime]="this.essayForm.value.fromTime"
+                            <ngx-timepicker-field [controlOnly]="true" [format]="24"
                                 formControlName="fromTime">
                             </ngx-timepicker-field>
                         </div>
@@ -81,7 +81,7 @@
                                 <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
                                 <mat-datepicker #toDate></mat-datepicker>
                             </mat-form-field>
-                            <ngx-timepicker-field [controlOnly]="true" [format]="24" [defaultTime]="this.essayForm.value.toTime"
+                            <ngx-timepicker-field [controlOnly]="true" [format]="24" 
                                 formControlName="toTime">
                             </ngx-timepicker-field>
                         </div>
