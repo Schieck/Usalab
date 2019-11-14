@@ -8,29 +8,35 @@
             </div>
         </mat-form-field>
     </div>
-    <div class="row">
-        <mat-form-field>
-            <input type="textarea" matInput placeholder="Descrição" formControlName="description"
-                [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+    <div class="row" style="width: 100%;">
+        <mat-form-field style="width: 100%;">
+            <textarea style=" width:100%; height: 150px;"matInput placeholder="Descrição" formControlName="description"
+                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
             <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
                 <div *ngIf="f.description.errors.required">A descrição da simulação é obrigatória</div>
             </div>
         </mat-form-field>
     </div>
     <div class="row">
-        <mat-form-field>
-            <input matInput type="datetime-local" placeholder="De" formControlName="from">
-            <mat-icon matSuffix>calendar_today</mat-icon>
+        <mat-form-field style="width: 52%;">
+                <input matInput [matDatepicker]="fromDate" formControlName="fromDate" placeholder="De">
+                <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                <mat-datepicker #fromDate></mat-datepicker>               
         </mat-form-field>
+        <ngx-timepicker-field [controlOnly]="true" [format]="24" formControlName="fromTime">
+        </ngx-timepicker-field>
     </div>
     <div class="row">
-        <mat-form-field>
-            <input matInput type="datetime-local" placeholder="Até" formControlName="to">
-            <mat-icon matSuffix>calendar_today</mat-icon>
+        <mat-form-field style="width: 52%;">
+            <input matInput [matDatepicker]="toDate" formControlName="toDate" placeholder="De">
+            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+            <mat-datepicker #toDate></mat-datepicker>
         </mat-form-field>
+        <ngx-timepicker-field [controlOnly]="true" [format]="24" formControlName="toTime">
+        </ngx-timepicker-field>
     </div>
     <div class="button" style="display: flex; justify-content: center;">
         <button [disabled]="loading" type="submit" mat-raised-button style="margin-right: 15px;">Cadastrar</button>
-        <button mat-stroked-button (click)="onNoClick()" color="primary">Cancelar</button>
+        <a mat-stroked-button (click)="onNoClick()" color="primary">Cancelar</a>
     </div>
 </form>
