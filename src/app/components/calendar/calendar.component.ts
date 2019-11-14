@@ -25,6 +25,7 @@ export class CalendarComponent implements OnInit {
   dateView: string;
   date = new Date();
   cards = [];
+  showNotExist: boolean;
 
   events: CalendarEvent[] = [];
   constructor(
@@ -79,5 +80,15 @@ export class CalendarComponent implements OnInit {
   convertTime(time) {
     var time = time.split(':');
     return (time[0]*60 +  time[1]);
+  }
+  verifyExist() {
+    this.showNotExist = true;
+    this.essays.forEach(element => {
+      console.log(this.convertDate(element.fromDate), this.dateView)
+      if(this.convertDate(element.fromDate) == this.dateView) {
+        this.showNotExist = false;
+      }
+    });
+    return this.showNotExist;
   }
 }
