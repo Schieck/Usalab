@@ -26,6 +26,7 @@ import { SearchComponent } from './components/search/search.component';
 import { IgxCalendarModule } from 'igniteui-angular';
 import { AlertComponent  } from './components/alert/alert.component';
 import { EssayComponent } from './components/essay/essay.component';
+import { EssayDialogComponent } from './components/essay-dialog/essay-dialog.component';
 
 import { JwtInterceptor, ErrorInterceptor, fakeBackendProvider } from './helpers';
 import { RegisterComponent } from './register/register.component';
@@ -49,7 +50,8 @@ import { EducationComponent } from './education/education.component';
     ResearchComponent,
     UsabilityComponent,
     EducationComponent,
-    EssayComponent
+    EssayComponent,
+    EssayDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ import { EducationComponent } from './education/education.component';
     fakeBackendProvider
   ],
   entryComponents: [
-    EssayComponent
+    EssayComponent,
+    EssayDialogComponent
   ],
   bootstrap: [AppComponent]
 })
