@@ -20,7 +20,7 @@
             </mat-card>
         </div>
         <div class="row" style="width: 100%; margin-bottom: 15px" *ngFor="let essay of essays">
-            <mat-card class="hover-effect" (click)="editEssay(essay.id)" style="width: 100%; cursor: pointer;">
+            <mat-card class="hover-effect" (click)="editEssay(essay.id)" style="width: 100%; cursor: pointer; word-wrap: break-word">
                 <mat-card-title fxLayoutAlign="left">
                     {{essay.title}}
                 </mat-card-title>

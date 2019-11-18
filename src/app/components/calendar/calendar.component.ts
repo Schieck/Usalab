@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { CalendarEvent } from 'angular-calendar';
 import { MaterialModule } from '../../material.module';
@@ -7,9 +7,14 @@ import { AuthenticationService, EssayService } from 'src/app/services';
 import { first } from 'rxjs/operators';
 import { User, Essay } from 'src/app/models';
 import { Subscription } from 'rxjs';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { EssayDialogComponent } from '../essay-dialog/essay-dialog.component';
 
 
-
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 @Component({
   selector: 'calendar',
   templateUrl: './calendar.component.html',
@@ -26,11 +31,13 @@ export class CalendarComponent implements OnInit {
   date = new Date();
   cards = [];
   showNotExist: boolean;
-
+  animal: string;
+  name: string;
   events: CalendarEvent[] = [];
   constructor(
     private authenticationService: AuthenticationService,
     private essayService: EssayService,
+    public dialog: MatDialog
   ) { 
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -90,4 +97,17 @@ export class CalendarComponent implements OnInit {
     });
     return this.showNotExist;
   }
+  openDialog(param): void {
+    console.log(param)
+    const dialogRef = this.dialog.open(EssayDialogComponent, {
+      width: '350px',
+      data: {card: param}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+  
 }
