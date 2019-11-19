@@ -1,15 +1,16 @@
 <div class="row">
     <mat-form-field>
-        <mat-icon matPrefix>face</mat-icon>
-        <mat-label>Visitas</mat-label>
-        <ngx-mat-file-input #visits [accept]="'.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'" (change)="onFileChange($event)"
-            placeholder="Mande aquela lanilha de visitas ;)">
+        <mat-icon matPrefix>people</mat-icon>
+        <mat-label>Planilha de visitas</mat-label>
+        <ngx-mat-file-input #visits
+            [accept]="'.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'"
+            (change)="onFileChange($event)">
         </ngx-mat-file-input>
         <button mat-icon-button matSuffix *ngIf="!visits.empty" (click)="visits.clear($event)">
             <mat-icon>clear</mat-icon>
         </button>
     </mat-form-field>
 </div>
-<div *ngIf="file" class="row">
-    {{file["Usalab Visitas"]}}
+<div class="row" style="display: flex; justify-content: flex-end;">
+    <button mat-stroked-button color="primary" (click)="save()">Salvar</button>
 </div>

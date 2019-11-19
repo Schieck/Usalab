@@ -2,8 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from 'src/app/models';
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from 'src/app/services';
+import { AuthenticationService, VisitService, AlertService } from 'src/app/services';
 import * as XLSX from 'xlsx';
+import { visitAll } from '@angular/compiler';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-excel-import',
@@ -19,6 +21,8 @@ export class ExcelImportComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private authenticationService: AuthenticationService,
+    private visitService: VisitService,
+    private alertService: AlertService,
     public dialogRef: MatDialogRef<ExcelImportComponent>) {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -40,7 +44,6 @@ export class ExcelImportComponent {
       }, {});
       this.file = JSON.parse(JSON.stringify(jsonData));
     }
-    reader.readAsBinaryString(file);
   }
 
   onNoClick(): void {
@@ -51,5 +54,20 @@ export class ExcelImportComponent {
   }
 
   ngOnInit() {
+  }
+
+  public save(){
+    if(this.file){
+      this.visitService.Update(this.file["Usalab Visitas"])
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.alertService.success('Visitas atualizadas com sucesso!', true);
+          this.dialogRef.close();
+        },
+        error => {
+          this.alertService.error(error, true);
+        });
+    }
   }
 }

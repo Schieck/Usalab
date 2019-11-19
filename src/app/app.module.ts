@@ -35,6 +35,7 @@ import { ResearchComponent } from './research/research.component';
 import { UsabilityComponent } from './usability/usability.component';
 import { EducationComponent } from './education/education.component';
 import { ExcelImportComponent } from './components/excel-import/excel-import.component';
+import { VisitorsComponent } from './components/visitors/visitors.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ExcelImportComponent } from './components/excel-import/excel-import.com
     EducationComponent,
     EssayComponent,
     EssayDialogComponent,
-    ExcelImportComponent
+    ExcelImportComponent,
+    VisitorsComponent
   ],
   imports: [
     BrowserModule,
