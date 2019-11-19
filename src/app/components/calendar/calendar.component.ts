@@ -31,7 +31,6 @@ export class CalendarComponent implements OnInit {
   date = new Date();
   cards = [];
   showNotExist: boolean;
-  animal: string;
   name: string;
   events: CalendarEvent[] = [];
   constructor(
@@ -98,15 +97,9 @@ export class CalendarComponent implements OnInit {
     return this.showNotExist;
   }
   openDialog(param): void {
-    console.log(param)
     const dialogRef = this.dialog.open(EssayDialogComponent, {
       width: '350px',
       data: {card: param}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
     });
   }
   

@@ -34,6 +34,7 @@ import { UsersComponent } from './users/users.component';
 import { ResearchComponent } from './research/research.component';
 import { UsabilityComponent } from './usability/usability.component';
 import { EducationComponent } from './education/education.component';
+import { ExcelImportComponent } from './components/excel-import/excel-import.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { EducationComponent } from './education/education.component';
     UsabilityComponent,
     EducationComponent,
     EssayComponent,
-    EssayDialogComponent
+    EssayDialogComponent,
+    ExcelImportComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { EducationComponent } from './education/education.component';
   ],
   entryComponents: [
     EssayComponent,
-    EssayDialogComponent
+    EssayDialogComponent,
+    ExcelImportComponent
   ],
   bootstrap: [AppComponent]
 })

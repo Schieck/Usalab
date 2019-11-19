@@ -80,7 +80,6 @@ export class EssayComponent {
         error => {
           this.alertService.error(error, true);
           this.loading = false;
-          this.dialogRef.close();
         });
   }
 }
