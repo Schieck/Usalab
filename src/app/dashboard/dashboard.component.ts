@@ -1,5 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { ExcelImportComponent } from '../components/excel-import/excel-import.component';
 
 
 @Component({
@@ -9,8 +11,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() {}
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
+  }
+
+  openDialog(param): void {
+    console.log(param)
+    const dialogRef = this.dialog.open(ExcelImportComponent, {
+      width: '350px'
+    });
   }
 }

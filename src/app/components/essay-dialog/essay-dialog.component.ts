@@ -1,10 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { User } from 'src/app/models';
+import { User, Essay } from 'src/app/models';
 import { Subscription } from 'rxjs';
 import { AuthenticationService, AlertService, EssayService } from 'src/app/services';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-essay-dialog',
@@ -18,12 +16,9 @@ export class EssayDialogComponent {
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private authenticationService: AuthenticationService,
-    public dialogRef: MatDialogRef<EssayDialogComponent>,
-    private formBuilder: FormBuilder,
-    private essayService: EssayService,
-    private alertService: AlertService)
+    public dialogRef: MatDialogRef<EssayDialogComponent>)
     {
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;
