@@ -9,6 +9,7 @@ import { User, Essay } from 'src/app/models';
 import { Subscription } from 'rxjs';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { EssayDialogComponent } from '../essay-dialog/essay-dialog.component';
+import moment from 'moment';
 
 
 export interface DialogData {
@@ -47,6 +48,7 @@ export class CalendarComponent implements OnInit {
     this.defineDate();
     this.loadAllEssays();
     this.createArrayCards();
+    moment.locale('pt-BR');
   }
   value(params) {
     this.date = params;
@@ -62,6 +64,11 @@ export class CalendarComponent implements OnInit {
       this.createArrayCards();
     });
   }
+
+  public formatDate(date: Date){
+    return moment(date).format("DD [de] MMMM[,] YYYY");
+  }
+
   public createArrayCards() {
     this.essays.forEach(element => {
       this.cards.push({

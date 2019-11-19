@@ -1,22 +1,31 @@
 <div class="row">
-    <div class="col-md-6" style="padding: 0;">
-        <div class="row">
+    <div class="col-md-6" style="padding: 0; ">
+        <div class="row" style="margin-bottom: 15px;">
             <div class="col-md-4" style="padding-left: 5px; padding-right: 5px;">
                 <mat-card [routerLink]="['/research']" class="hover-effect" style="cursor: pointer;">
-                    <mat-card-title style="display: flex;justify-content: center;align-items: center;"><mat-icon style="margin-right: 12.5px; transform: rotate(-180deg);" height="30px">wb_incandescent</mat-icon>Pesquisa</mat-card-title>
+                    <mat-card-title style="display: flex;justify-content: center;align-items: center;">
+                        <mat-icon style="margin-right: 12.5px; transform: rotate(-180deg);" height="30px">
+                            wb_incandescent</mat-icon>Pesquisa
+                    </mat-card-title>
                 </mat-card>
             </div>
             <div class="col-md-4" style="padding-left: 5px; padding-right: 5px;">
                 <mat-card [routerLink]="['/usability']" class="hover-effect" style="cursor: pointer;">
-                    <mat-card-title style="display: flex;justify-content: center;align-items: center;"><mat-icon style="margin-right: 12.5px;" height="30px">perm_data_setting</mat-icon>Usabilidade</mat-card-title>
+                    <mat-card-title style="display: flex;justify-content: center;align-items: center;">
+                        <mat-icon style="margin-right: 12.5px;" height="30px">perm_data_setting</mat-icon>Usabilidade
+                    </mat-card-title>
                 </mat-card>
             </div>
             <div class="col-md-4" style="padding-left: 5px; padding-right: 5px;">
                 <mat-card [routerLink]="['/education']" class="hover-effect" style="cursor: pointer;">
-                    <mat-card-title style="display: flex;justify-content: center;align-items: center;"><mat-icon style="margin-right: 12.5px;" height="30px">book</mat-icon>Educação</mat-card-title>
+                    <mat-card-title style="display: flex;justify-content: center;align-items: center;">
+                        <mat-icon style="margin-right: 12.5px;" height="30px">book</mat-icon>Educação
+                    </mat-card-title>
                 </mat-card>
-                <button (click)="openDialog()">ABRE VISITAS</button>
             </div>
+        </div>
+        <div class="row">           
+            <app-visitors style="height: 409px; width: 100%;"></app-visitors>
         </div>
     </div>
     <div class="col-md-6" style="padding-left: 5px; padding-right: 5px;">

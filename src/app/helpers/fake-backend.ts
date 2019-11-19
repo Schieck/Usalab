@@ -15,6 +15,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // array in local storage for registered essays
         let essays: any[] = JSON.parse(localStorage.getItem('essays')) || [];
 
+        // array in local storage for registered visits
+        let visits: any[] = JSON.parse(localStorage.getItem('visits')) || [];
+
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
 
@@ -122,6 +125,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return essays if valid, this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     return of(new HttpResponse({ status: 200, body: essays }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            //get visits
+            if (request.url.endsWith('/visits') && request.method === 'GET') {
+                // check for fake auth token in header and return visits if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    return of(new HttpResponse({ status: 200, body: visits }));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    return throwError({ status: 401, error: { message: 'Unauthorised' } });
+                }
+            }
+
+            //set visits
+            if (request.url.endsWith('/visits/') && request.method === 'PUT') {
+                // check for fake auth token in header and return visits if valid, this security is implemented server side in a real application
+                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                    visits = request.body;
+                    localStorage['visits'] = visits;
                 } else {
                     // return 401 not authorised if token is null or invalid
                     return throwError({ status: 401, error: { message: 'Unauthorised' } });
