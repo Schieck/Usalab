@@ -1,0 +1,38 @@
+    <div class="row">
+        <div class="col-md-12" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 5px; cursor: pointer; padding-right:0; margin-left:11px">
+            <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px; transform: rotate(45deg); margin-top: -20px; margin-left:8px" (click)="onNoClick()">
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-md-12" style="display: flex; justify-content: center;">
+                <h6>Registro de agendamento</h6>
+            </div>
+        </div>
+    <div style="overflow-y: scroll; max-height: 430px;">
+        <div class="row">
+            <div class="col-md-12">
+                <span style="font-weight: bold; font-size: 17px;">Tipo: </span>
+                <span *ngIf="data.card.type == 'education'">Educação</span>
+                <span *ngIf="data.card.type == 'usability'">Usabilidade</span>
+                <span *ngIf="data.card.type == 'research'">Pesquisa</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span style="font-weight: bold; font-size: 17px;">Duração: </span>
+                <span>{{data.card.initialHour}}-{{data.card.finalHour}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="word-wrap: break-word">
+                <span style="font-weight: bold; font-size: 17px;">Título: </span>
+                <span>{{data.card.title}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="word-wrap: break-word">
+                <span style="font-weight: bold; font-size: 17px;">Descrição: </span>
+                <span>{{data.card.description}}</span>
+            </div>
+        </div>
+    </div>

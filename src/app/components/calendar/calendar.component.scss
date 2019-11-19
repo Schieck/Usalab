@@ -5,6 +5,15 @@
     overflow-y: auto;
 }
 
+.text {
+    width: 250px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
+
 .cal-wrapper {
     margin: 20px;
     height: 100%;
