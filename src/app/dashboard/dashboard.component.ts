@@ -18,8 +18,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
   }
 
-  openDialog(param): void {
-    console.log(param)
+  openDialog(): void {
     const dialogRef = this.dialog.open(ExcelImportComponent, {
       width: '350px'
     });
