@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ExcelImportComponent, {
-      width: '350px'
+      width: '300px'
     });
   }
 }

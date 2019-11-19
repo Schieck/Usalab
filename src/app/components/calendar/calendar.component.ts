@@ -98,7 +98,7 @@ export class CalendarComponent implements OnInit {
   }
   openDialog(param): void {
     const dialogRef = this.dialog.open(EssayDialogComponent, {
-      width: '350px',
+      width: '300px',
       data: {card: param}
     });
   }
