@@ -21,16 +21,13 @@
                 <mat-icon>person</mat-icon>Users
             </button>
             <button mat-menu-item [routerLink]="['/education']" color="primary">
-                <img style="margin-right: 12.5px;" src="../../assets/images/cap.svg"
-        height="24px">Educação
+                <mat-icon style="margin-right: 12.5px;">book</mat-icon>Educação
             </button>
              <button mat-menu-item [routerLink]="['/research']" color="primary">
-                <img style="margin-right: 12.5px;" src="../../assets/images/innovation.svg"
-                height="24px">Pesquisa
+                <mat-icon style="margin-right: 12.5px; transform: rotate(-180deg);">wb_incandescent</mat-icon>Pesquisa
             </button>
             <button mat-menu-item [routerLink]="['/usability']" color="primary">
-                <img style="margin-right: 12.5px;" src="../../assets/images/settings.svg"
-                height="24px">Usabilidade
+                <mat-icon style="margin-right: 12.5px;">perm_data_setting</mat-icon>Usabilidade
             </button>
             <button mat-menu-item (click)="logout()">
                 <mat-icon>exit_to_app</mat-icon>Logout

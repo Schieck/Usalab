@@ -1,38 +1,30 @@
+<div class="row" style="align-items: center; display: flex; margin-bottom: 20px;">
+    <div class="col-md-2" style="margin: 0; padding: 0; display: flex; justify-content: flex-start; padding-right:0; width: 24px;">
+        <mat-icon *ngIf="data.card.type == 'education'">book</mat-icon>
+        <mat-icon *ngIf="data.card.type == 'usability'">perm_data_setting</mat-icon>
+        <mat-icon *ngIf="data.card.type == 'research'" style="transform: rotate(-180deg)!important;">wb_incandescent
+        </mat-icon>
+    </div>
+    <div class="col-md-8"
+        style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: center; padding-right:0; font-size: 26px; width: 204px;">
+        <h6 class="text">{{data.card.title}}</h6>
+    </div>
+    <div class="col-md-2"
+        style="margin: 0; padding: 0; display: flex; align-items: center; justify-content: flex-end; cursor: pointer; padding-right:0; font-size: 26px; width: 24px;">
+        <mat-icon (click)="onNoClick()">close</mat-icon>
+    </div>
+</div>
+<div class="row" style="margin-bottom: 15px;">
+    <div class="col-md-12" style="display: flex; align-items: center; justify-content: flex-end;">
+        <span class="dateLabel">De: {{data.card.initialHour}}</span>
+        <span class="dateLabel to">Até: {{data.card.finalHour}}</span>
+    </div>
+</div>
+<div style="overflow-y: scroll; max-height: 430px;">
     <div class="row">
-        <div class="col-md-12" style="margin: 0; padding: 0; display: flex; justify-content: flex-end; margin-top: 5px; cursor: pointer; padding-right:0; margin-left:11px">
-            <img src="../../../assets/images/plus.svg" alt="" style="height:12.5px; transform: rotate(45deg); margin-top: -20px; margin-left:8px" (click)="onNoClick()">
+        <div class="col-md-12" style="word-wrap: break-word">
+            <span style="font-weight: bold; font-size: 17px;">Descrição: </span>
+            <span>{{data.card.description}}</span>
         </div>
     </div>
-        <div class="row">
-            <div class="col-md-12" style="display: flex; justify-content: center;">
-                <h6>Registro de agendamento</h6>
-            </div>
-        </div>
-    <div style="overflow-y: scroll; max-height: 430px;">
-        <div class="row">
-            <div class="col-md-12">
-                <span style="font-weight: bold; font-size: 17px;">Tipo: </span>
-                <span *ngIf="data.card.type == 'education'">Educação</span>
-                <span *ngIf="data.card.type == 'usability'">Usabilidade</span>
-                <span *ngIf="data.card.type == 'research'">Pesquisa</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <span style="font-weight: bold; font-size: 17px;">Duração: </span>
-                <span>{{data.card.initialHour}}-{{data.card.finalHour}}</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="word-wrap: break-word">
-                <span style="font-weight: bold; font-size: 17px;">Título: </span>
-                <span>{{data.card.title}}</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12" style="word-wrap: break-word">
-                <span style="font-weight: bold; font-size: 17px;">Descrição: </span>
-                <span>{{data.card.description}}</span>
-            </div>
-        </div>
-    </div>
+</div>

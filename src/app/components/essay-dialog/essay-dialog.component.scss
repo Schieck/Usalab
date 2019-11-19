@@ -1,0 +1,20 @@
+.dateLabel {
+    padding: 3px;
+    background-color: darkolivegreen;
+    color: white;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.to{
+    background-color: darkslategrey;
+}
+
+.text {
+    width: 100px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    direction: ltr;
+}
