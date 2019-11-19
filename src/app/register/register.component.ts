@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmpassword: ['', []],
       avatar: [null]
     });
   }
@@ -50,8 +51,6 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
-    console.log(this.image);
 
     if (this.image != null) {
       this.registerForm.value.avatar = this.image;
