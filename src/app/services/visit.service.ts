@@ -9,7 +9,7 @@ export class VisitService {
         return this.http.get<any[]>(`/visits`);
     }
 
-    Update(list: any[]) {
+    Update(list: string) {
         return this.http.put(`/visits/`, list);
     }
 }

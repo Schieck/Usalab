@@ -17,8 +17,21 @@ export class VisitorsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+	this.mountChart();
 
-    var ctx = document.getElementById('chartContainer');
+	this.dialog.afterAllClosed.subscribe(() => {
+		this.mountChart();
+	});
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ExcelImportComponent, {
+      width: '300px'
+    });
+  }
+
+  mountChart(){
+	var ctx = document.getElementById('chartContainer');
 
     var MONTHS = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
     
@@ -31,9 +44,11 @@ export class VisitorsComponent implements OnInit {
 					backgroundColor: "#7e9c41",
 					borderColor: "#7e9c41",
 					data: [
-						12,
-						24,
-						0
+						JSON.parse(localStorage["visits"])["19"]["8"],
+						JSON.parse(localStorage["visits"])["19"]["9"],
+						JSON.parse(localStorage["visits"])["19"]["10"],
+						JSON.parse(localStorage["visits"])["19"]["11"],
+						JSON.parse(localStorage["visits"])["19"]["12"]
 					],
 					fill: false,
 				}, {
@@ -42,9 +57,11 @@ export class VisitorsComponent implements OnInit {
 					backgroundColor: "#419c79",
 					borderColor: "#419c79",
 					data: [
-						2,
-						4,
-						9
+						JSON.parse(localStorage["visits"])["18"]["8"],
+						JSON.parse(localStorage["visits"])["18"]["9"],
+						JSON.parse(localStorage["visits"])["18"]["10"],
+						JSON.parse(localStorage["visits"])["18"]["11"],
+						JSON.parse(localStorage["visits"])["18"]["12"]
 					],
 				}]
 			},
@@ -77,13 +94,6 @@ export class VisitorsComponent implements OnInit {
 			}
     };
     
-    let myChart = new Chart(ctx, config);
+	let myChart = new Chart(ctx, config);
   }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ExcelImportComponent, {
-      width: '300px'
-    });
-  }
-
 }

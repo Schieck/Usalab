@@ -16,7 +16,7 @@ import { first } from 'rxjs/operators';
 export class ExcelImportComponent {
   currentUser: User;
   currentUserSubscription: Subscription;
-  file: any[];
+  file: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -42,8 +42,27 @@ export class ExcelImportComponent {
         initial[name] = XLSX.utils.sheet_to_json(sheet);
         return initial;
       }, {});
-      this.file = JSON.parse(JSON.stringify(jsonData));
+      //this.file = JSON.stringify(jsonData["Usalab Visitas"]);
+
+      let visits = JSON.parse('{"19":{},"18":{}}');
+
+      jsonData["Usalab Visitas"].forEach(element => {
+        var data = element["Data"].split("/");
+        var ano = data[2];
+        var mes = data[1];
+
+        if(!visits[ano][mes]){
+          visits[ano][mes] = 0;
+        }
+
+        visits[ano][mes] += Number(element["Total de Visitantes"]);
+      });
+
+      this.file = JSON.stringify(visits);
     }
+
+    reader.readAsBinaryString(file);
+
   }
 
   onNoClick(): void {
@@ -58,7 +77,7 @@ export class ExcelImportComponent {
 
   public save(){
     if(this.file){
-      this.visitService.Update(this.file["Usalab Visitas"])
+      this.visitService.Update(this.file)
       .pipe(first())
       .subscribe(
         data => {
@@ -68,6 +87,8 @@ export class ExcelImportComponent {
         error => {
           this.alertService.error(error, true);
         });
+    }else{
+      this.alertService.error("Arquivo não selecionado, selecione um arquivo antes de salvar.", true);
     }
   }
 }
