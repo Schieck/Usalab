@@ -1,98 +1,111 @@
-<h4 style="margin-left:15px; margin-bottom: 15px;"> <mat-icon style="margin-right: 12.5px;" height="30px">perm_data_setting</mat-icon>
-Usabilidade
-<span>
-    <mat-icon (click)="openDialog()" *ngIf="essays[0]"
-        style="border-radius:50%; margin-left: 10%;  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 30px; background:white; height: 35px; width: 35px;"
-        class="centered-and-cropped mat-elevation-z3 hover-effect">
-        add
-    </mat-icon>
-</span>
+<h4 style="margin-left:15px; margin-bottom: 15px;">
+    <mat-icon style="margin-right: 12.5px;" height="30px">perm_data_setting</mat-icon>
+    Usabilidade
+    <span>
+        <mat-icon (click)="openDialog()" *ngIf="essays[0]"
+            style="border-radius:50%; margin-left: 10%;  display: inline-flex; align-items: center; justify-content: center; cursor: pointer; font-size: 30px; background:white; height: 35px; width: 35px;"
+            class="centered-and-cropped mat-elevation-z3 hover-effect">
+            add
+        </mat-icon>
+    </span>
 </h4>
 <div class="row">
-<div class="col-md-4">
-    <div class="row" style="width: 100%">
-        <mat-card *ngIf="!essays[0]" class="hover-effect" (click)="openDialog()"
-            style="width: 100%; cursor: pointer;">
-            <mat-card-title style="align-items: center; text-align: center;display: flex; justify-content: center;">
-                <mat-icon style="font-size: 30px">add</mat-icon>
-            </mat-card-title>
+    <div class="col-md-4">
+        <div class="row" style="width: 100%">
+            <mat-card *ngIf="!essays[0]" class="hover-effect" (click)="openDialog()"
+                style="width: 100%; cursor: pointer;">
+                <mat-card-title style="align-items: center; text-align: center;display: flex; justify-content: center;">
+                    <mat-icon style="font-size: 30px">add</mat-icon>
+                </mat-card-title>
+            </mat-card>
+        </div>
+        <div class="row" style="width: 100%; margin-bottom: 15px" *ngFor="let essay of essays">
+            <mat-card class="hover-effect" (click)="editEssay(essay.id)" style="width: 100%; cursor: pointer;">
+                <mat-card-title fxLayoutAlign="left">
+                    {{essay.title}}
+                </mat-card-title>
+                <mat-card-content>
+                    {{essay.description}}
+                </mat-card-content>
+                <mat-card-actions>
+                    <div class="row">
+                        <div class="col-md-6"><span class="dateLabel col-md-6">De: {{formatDate(essay.fromDate)}}
+                                {{essay.fromTime}}</span>
+                        </div>
+                        <div class="col-md-6"><span class="dateLabel to">Até: {{formatDate(essay.toDate)}}
+                                {{essay.toTime}}</span></div>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <mat-card style="width: 100%;">
+            <form [formGroup]="essayForm" *ngIf="essays[0]" (ngSubmit)="onSubmit()">
+                <mat-tab-group>
+                    <mat-tab label="Informações básicas">
+                        <div class="row" style="margin-top: 10px">
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Título" formControlName="title"
+                                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                                <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                    <div *ngIf="f.title.errors.required">O título da simulação é obrigatório.</div>
+                                </div>
+                            </mat-form-field>
+                        </div>
+                        <div class="row" style="width: 100%;">
+                            <mat-form-field style="width: 100%;">
+                                <textarea style="width: 100%; height: 150px;" matInput placeholder="Descrição"
+                                    formControlName="description"
+                                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                    <div *ngIf="f.description.errors.required">A descrição da simulação é obrigatória
+                                    </div>
+                                </div>
+                            </mat-form-field>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <mat-form-field style="width: 35%;">
+                                        <input matInput [matDatepicker]="fromDate"
+                                            value="{{this.essayForm.value.fromDate}}" formControlName="fromDate"
+                                            placeholder="De">
+                                        <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #fromDate></mat-datepicker>
+                                    </mat-form-field>
+                                    <ngx-timepicker-field [controlOnly]="true" [format]="24" formControlName="fromTime">
+                                    </ngx-timepicker-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <mat-form-field style="width: 35%;">
+                                        <input matInput [matDatepicker]="toDate" formControlName="toDate"
+                                            value="{{this.essayForm.value.toDate}}" placeholder="Até">
+                                        <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #toDate></mat-datepicker>
+                                    </mat-form-field>
+                                    <ngx-timepicker-field [controlOnly]="true" [format]="24" formControlName="toTime">
+                                    </ngx-timepicker-field>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Arquivos">
+                        <div class="row"
+                            style="height: 334.5px; align-items: center; text-align: center;display: flex; justify-content: center; background-color: ghostwhite; border: 1px solid #bebebe;border-radius: 5px;">
+                            <mat-icon>add</mat-icon>Futuramente você poderá arrastar um arquivo aqui !
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+                <div>
+                    <button [disabled]="loading" type="submit" mat-raised-button
+                        style="margin-right: 15px;">Salvar</button>
+                    <button mat-stroked-button (click)="deleteEssay()" color="warn">Deletar</button>
+                </div>
+            </form>
+            <p style="width: 100%; text-align: center;" *ngIf="!essays[0]">Nenhuma simulação cadastrada!</p>
         </mat-card>
     </div>
-    <div class="row" style="width: 100%; margin-bottom: 15px" *ngFor="let essay of essays">
-        <mat-card class="hover-effect" (click)="editEssay(essay.id)" style="width: 100%; cursor: pointer;">
-            <mat-card-title fxLayoutAlign="left">
-                {{essay.title}}
-            </mat-card-title>
-            <mat-card-content>
-                {{essay.description}}
-            </mat-card-content>
-            <mat-card-actions>
-                <div class="row">
-                    <div class="col-md-6"><span class="dateLabel col-md-6">De: {{formatDate(essay.fromDate)}}
-                            {{essay.fromTime}}</span>
-                    </div>
-                    <div class="col-md-6"><span class="dateLabel to">Até: {{formatDate(essay.toDate)}}
-                            {{essay.toTime}}</span></div>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </div>
-</div>
-<div class="col-md-8">
-    <mat-card style="width: 100%;">
-        <form [formGroup]="essayForm" *ngIf="essays[0]" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <mat-form-field>
-                    <input type="text" matInput placeholder="Título"
-                        formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-                    <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-                        <div *ngIf="f.title.errors.required">O título da simulação é obrigatório.</div>
-                    </div>
-                </mat-form-field>
-            </div>
-            <div class="row" style="width: 100%;">
-                <mat-form-field style="width: 100%;">
-                    <textarea style="width: 100%; height: 150px;" matInput placeholder="Descrição"
-                        formControlName="description"
-                        [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
-                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                        <div *ngIf="f.description.errors.required">A descrição da simulação é obrigatória</div>
-                    </div>
-                </mat-form-field>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="row">
-                        <mat-form-field style="width: 35%;">
-                            <input matInput [matDatepicker]="fromDate" value="{{this.essayForm.value.fromDate}}" formControlName="fromDate" placeholder="De">
-                            <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
-                            <mat-datepicker #fromDate></mat-datepicker>
-                        </mat-form-field>
-                        <ngx-timepicker-field [controlOnly]="true" [format]="24"
-                            formControlName="fromTime">
-                        </ngx-timepicker-field>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <mat-form-field style="width: 35%;">
-                            <input matInput [matDatepicker]="toDate" formControlName="toDate" value="{{this.essayForm.value.toDate}}" placeholder="Até">
-                            <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
-                            <mat-datepicker #toDate></mat-datepicker>
-                        </mat-form-field>
-                        <ngx-timepicker-field [controlOnly]="true" [format]="24" 
-                            formControlName="toTime">
-                        </ngx-timepicker-field>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <button [disabled]="loading" type="submit" mat-raised-button
-                    style="margin-right: 15px;">Salvar</button>
-                <button mat-stroked-button (click)="deleteEssay()" color="warn">Delete</button>
-            </div>
-        </form>
-        <p style="width: 100%; text-align: center;" *ngIf="!essays[0]">Nenhuma simulação cadastrada!</p>
-    </mat-card>
-</div>
 </div>
